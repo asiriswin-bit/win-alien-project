@@ -139,3 +139,6 @@ body.effects-off dialog[open]{animation:none}
  .flow-result{padding:18px 24px}
  .estimate-v3{max-height:440px!important}
 }
+
+/* Partners stand on the slide background, without game artwork. */
+.meeting-world{background:transparent}.meeting-world:after{display:none}
