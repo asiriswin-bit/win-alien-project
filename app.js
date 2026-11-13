@@ -216,6 +216,7 @@ const videoDialog=$('#video-dialog');
 videoDialog.addEventListener('close',()=>$('#video-player').replaceChildren());
 document.addEventListener('click',e=>{
  const video=e.target.closest('[data-video]');if(video){
+  e.preventDefault();
   const id=video.dataset.video;if(!['60iMY4vpxWc','7Nlm1V_fG04'].includes(id))return;
   pauseTimer();$('#video-title').textContent=video.dataset.author+' · WIN ALIEN';
   $('#video-external').href='https://www.youtube.com/watch?v='+id;
