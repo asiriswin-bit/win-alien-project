@@ -212,7 +212,20 @@ $('#share-button').onclick=async()=>{try{const url=new URL(location.href);if(url
 async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{toast('Полный экран недоступен в этом окне. Можно открыть сайт в браузере.');}}
 $('#fullscreen').onclick=fullscreen;
 $('#demo-pause').onclick=()=>{pauseTimer();toast('Секундомер на паузе. Можно перейти в админку, затем продолжить показ.');};
+const videoDialog=$('#video-dialog');
+videoDialog.addEventListener('close',()=>$('#video-player').replaceChildren());
 document.addEventListener('click',e=>{
+ const video=e.target.closest('[data-video]');if(video){
+  const id=video.dataset.video;if(!['60iMY4vpxWc','7Nlm1V_fG04'].includes(id))return;
+  pauseTimer();$('#video-title').textContent=video.dataset.author+' · WIN ALIEN';
+  $('#video-external').href='https://www.youtube.com/watch?v='+id;
+  const frame=document.createElement('iframe');frame.title='Видео '+video.dataset.author;
+  frame.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+  frame.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';frame.allowFullscreen=true;
+  frame.referrerPolicy='strict-origin-when-cross-origin';$('#video-player').replaceChildren(frame);
+  videoDialog.showModal();return;
+ }
+
  const zoom=e.target.closest('[data-zoom]');if(zoom){const im=$('img',zoom);$('#zoomed-image').src=im.src;$('#zoomed-image').alt=im.alt;$('#zoom-caption').textContent=im.alt;$('#image-dialog').showModal();return;}
  const goto=e.target.closest('[data-goto]');if(goto){$('#contents-dialog').close();goTo(Number(goto.dataset.goto));return;}
  const link=e.target.closest('a[href^="#slide-"]');if(link){e.preventDefault();goTo(Number(link.hash.slice(7))-1);return;}
