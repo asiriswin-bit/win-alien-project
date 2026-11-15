@@ -93,8 +93,9 @@ function playScene(i,force=false){
   enter('.gantt-risks p',{y:12},.9,.1);
  }else if(kind==='finance-scene'){
   enter('.finance-controls',{x:-24},.16);
-  enter('.flow-row',{x:26},.3,.13);
-  enter('.flow-result',{y:20},.95);
+  enter('.teaching-finance thead',{y:8},.24);
+  enter('.teaching-finance tbody tr',{x:16},.34,.055);
+  enter('.finance-table-note',{y:10},1.0);
  }else if(kind==='estimate-scene'){
   enter('.estimate-table thead',{y:8},.14);
   enter('.estimate-table tbody tr',{x:-24},.28);
